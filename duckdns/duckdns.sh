@@ -13,5 +13,5 @@ for section in "${sections[@]}" ; do
 	token="$(crudini --get "$config_file" "$section" token)"
 	echo -n "$(hostname): $(date "+%Y-%m-%d %H:%M:%S"): ${domain} is " >> "$logfile"
  	echo url="https://www.duckdns.org/update?domains=${domain}&token=${token}&ip=" | curl -s -k -K - >> "$logfile"
- 	echo "" >> "$logfile"
+ 	echo "" > "$logfile"
 done
