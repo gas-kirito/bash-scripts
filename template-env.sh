@@ -6,6 +6,7 @@ Usage: $(basename "$0") [ options ] arguments
 
 Options:
     -h|--help                   Show this help
+    -n|--dry-run                Trial run, no changes made
 
 EOF
 }
@@ -15,6 +16,11 @@ log_msg() {
 err_msg() {
     echo -e "\033[1;31mEE:\033[0m $1" >&2
 }
+catch_error() {
+    err_msg "exit status $1 on line $2"
+    exit 1
+}
+trap 'catch_error $? $LINENO' ERR
 clean_exit() {
     log_msg "Terminating script at: `date`"
 }
